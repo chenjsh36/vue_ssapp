@@ -35,6 +35,7 @@
             position: relative;
             padding: 10px 0;
             border-bottom: 1px solid #aaa;
+            background-color: #fff;
             .ss-article-item-info {
                 height: @articleItemHeight;
 

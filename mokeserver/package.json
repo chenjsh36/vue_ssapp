@@ -1,0 +1,16 @@
+{
+  "name": "mokeserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "fms.js",
+  "dependencies": {
+    "fms": "^0.0.32"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "nodemon -w fms.js fms.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

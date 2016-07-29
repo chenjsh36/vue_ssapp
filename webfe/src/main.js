@@ -5,7 +5,10 @@ import VueResource from 'vue-resource'
 import SSApp from './SSApp.vue'
 import ViewHome from './Views/ViewHome.vue'
 import ViewType from './Views/ViewType.vue'
-
+import ViewHot from './Views/ViewHot.vue'
+import ViewUser from './Views/ViewUser.vue'
+import ViewUserLogin from './Views/ViewUserLogin.vue'
+import ViewUserReg from './Views/ViewUserReg.vue'
 // new Vue({
 //     el: 'body',
 //     components: { SSApp }
@@ -23,6 +26,25 @@ router.map({
     },
     '/type': {
         component: ViewType
+    },
+    '/hot': {
+        component: ViewHot
+    },
+    '/user': {
+        component: {
+            template: '<router-view></router-view>'
+        },
+        subRoutes: {
+            '/': {
+                component: ViewUser
+            },
+            '/login': {
+                component: ViewUserLogin
+            },
+            '/reg': {
+                component: ViewUserReg
+            }
+        }
     }
 })
 

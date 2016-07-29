@@ -44,7 +44,7 @@ fms.ajax(
         }
     }
 )
-
+// 最新文章列表
 fms.ajax(
     {
         url: '/articles/lastarticles/',
@@ -162,6 +162,7 @@ fms.ajax(
         }
 })
 
+// 所有文章类型
 fms.ajax({
     url: '/articles/articletypes/',
     type: 'get',
@@ -217,4 +218,50 @@ fms.ajax({
             msg: '作品类型请求失败'
         }
     }
+})
+
+// 热门文章类型
+fms.ajax(
+    {
+        url: '/articles/hotarticles/',
+        type: 'get',
+        dataType: 'json',
+        res: {
+            ok: {
+                status: 200,
+                msg: '请求成功',
+                data: {
+                    hot_articles: [
+                        {
+                            id: 1,
+                            title: '今年最火的动漫',
+                            name: '在下版本，有何贵干',
+                            img: 'http://i0.hdslb.com/bfs/archive/c1a3366a52995125fc4102e2e950a44b52494779.jpg',
+                            content: '非常搞笑的动漫',
+                            type: ['搞笑', '校园', '感动'],
+                            actors: ['版本'],
+                            director: '导演',
+                            company: '中北明',
+                            evaluate: 99,
+                        },
+                        {
+                            id: 2,
+                            title: '今年期待的动漫',
+                            name: '半田君的日常生活',
+                            img: 'http://rs.bukade.com/upfiles/2016/06/081648339.jpg',
+                            content: '主人公有毒',
+                            type: ['热血', '校园', '脑残'],
+                            actors: ['半田君'],
+                            director: '王金',
+                            company: '斐波那契',
+                            evaluate: 90,
+                        }
+                    ],
+                }
+            },
+            err: {
+                status: 401,
+                msg: '热门作品数据请求失败'
+            }
+        }
 })
