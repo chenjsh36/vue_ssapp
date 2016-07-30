@@ -1,10 +1,15 @@
 <template lang="jade">
     .ss-user
         .ss-user-card(v-on:click="goUserInfo")
-            .ss-user-card-img 
-                img(src="http://i0.hdslb.com/bfs/archive/c1a3366a52995125fc4102e2e950a44b52494779.jpg" alt="个人头像" class="img-circle")
-            .ss-user-card-name 我的姓名
-        .ss-user-info.row
+            template(v-if="auth.is_login")
+                .ss-user-card-img  
+                    img(src="http://i0.hdslb.com/bfs/archive/c1a3366a52995125fc4102e2e950a44b52494779.jpg" alt="个人头像" class="img-circle")
+                .ss-user-card-name chenjsh36
+            template(v-else)
+                .ss-user-card-img  
+                    img(src="http://i0.hdslb.com/bfs/archive/c1a3366a52995125fc4102e2e950a44b52494779.jpg" alt="个人头像" class="img-circle")
+                .ss-user-card-name 请点击登录   
+        .ss-user-info
             .ss-user-info-item.col-xs-4 历史
             .ss-user-info-item.col-xs-4 收藏
             .ss-user-info-item.col-xs-4 金币
@@ -20,13 +25,23 @@
                 name: 'ViewUser'
             }
         },
+        props: ['auth'],
         ready: function() {
-            console.log('ViewUser ready!')
+            console.log('ViewUser ready!', this.auth, this)
         },
         methods: {
+            /**
+             * 登录时跳转到个人信息设置页面，未登录跳转到登录页面
+             */
             goUserInfo: function() {
                 console.log('gouserinfo:', this);
-                this.$router.go('/user/login');
+                // 已经登录
+                if (this.auth.is_login === false) {
+                    this.$router.go('/user/login')
+                    return
+                }
+                this.$router.go('/user/setinfo')
+                return
             }
         }
     }
@@ -68,6 +83,15 @@
         .ss-user-info {
             position: relative;
             background-color: white;
+            &:before {
+                content: '';
+                display: table;
+            }
+            &:after {
+                content: '';
+                display: table;
+                clear: both;
+            }
             .ss-user-info-item {
                 position: relative;
 

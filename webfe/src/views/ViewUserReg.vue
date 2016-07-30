@@ -1,7 +1,7 @@
 <template lang="jade">
-    .ss-fixed-container
+    .ss-fixed-container(v-show="show" transition="ss")
         .ss-topbar
-            .back-item(v-on:click="goBack") 返回
+            .back-item.glyphicon.glyphicon-circle-arrow-left(v-on:click="goBack")
             .title(v-on:click="focus") 注册
 
         .ss-login-container
@@ -14,11 +14,6 @@
                     input.form-control(type="password" placeholder="确认密码") 
                 button.btn.btn-default.btn-block 注册
 
-        .ss-fixed-bottombar
-            .ss-go-reg
-                p 
-                    |已有账号？
-                    a(v-link="{ path: '/user/login' }") 前去登录
 </template>
 
 <script>
@@ -26,7 +21,8 @@
         data() {
             return {
                 msg: 'I am view user login',
-                name: 'ViewUserLogin'
+                name: 'ViewUserLogin',
+                show: true
             }
         },
         ready: function() {
@@ -51,12 +47,6 @@
             margin: 15px;
         }
     }
-    .ss-fixed-bottombar {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin-bottom: 15px;
-        text-align: center;
-    }
+
+
 </style>

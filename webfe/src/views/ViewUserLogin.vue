@@ -1,16 +1,16 @@
 <template lang="jade">
-    .ss-fixed-container
+    .ss-fixed-container(v-show="show" transition="ss")
         .ss-topbar
-            .back-item(v-on:click="goBack") 返回
-            .title(v-on:click="focus") 登录
+            .back-item.glyphicon.glyphicon-circle-arrow-left(v-on:click="goBack")
+            .title 登录
 
         .ss-login-container
             form.ss-login-form
                 .form-group
-                    input.form-control(type="text" placeholder="用户名")
+                    input.form-control(type="text" placeholder="用户名" v-model="user" name="login_user")
                 .form-group
-                    input.form-control(type="password" placeholder="密码") 
-                button.btn.btn-default.btn-block 登录
+                    input.form-control(type="password" placeholder="密码" v-model="password" name="login_password") 
+                button.btn.btn-default.btn-block(v-on:click="login") 登录
 
         .ss-fixed-bottombar
             .ss-go-reg
@@ -20,11 +20,15 @@
 </template>
 
 <script>
+    import SS from '.././common/ssquery.js'
     export default {
         data() {
             return {
                 msg: 'I am view user login',
-                name: 'ViewUserLogin'
+                name: 'ViewUserLogin',
+                show: true,
+                user: '',
+                password: ''
             }
         },
         ready: function() {
@@ -35,10 +39,60 @@
             goBack: function() {
                 window.history.back()
             },
-            focus: function() {
-                var inputs = document.querySelector('.ss-login-container input')
-                console.log('input:', inputs);
-                inputs.click()
+            checkLoginForm: function() {
+                let user = this.user
+                    , password = this.password
+                    , user_input = document.querySelector('input[name=login_user]')
+                    , password_input = document.querySelector('input[name=login_password]')
+                    , is_ok = true
+                    ; 
+                if (user === '') {
+                    SS.addClass(user_input.parentNode, 'has-error')
+                    is_ok = false
+                } else if (/^[A-Za-z0-9_\-\u4e00-\u9fa5]{3,20}$/.test(user) === false) {
+                
+                    SS.addClass(user_input.parentNode, 'has-error')
+                    is_ok = false
+                } else {
+                    SS.removeClass(user_input.parentNode, 'has-error')
+                }
+
+                if (password === '') {
+                    SS.addClass(password_input.parentNode, 'has-error')
+                    is_ok = false
+                } else if (/^[A-Za-z0-9_-]{3,20}$/.test(password) === false) {
+                    SS.addClass(password_input.parentNode, 'has-error')
+                    is_ok = false
+                } else {
+                    SS.removeClass(password_input.parentNode, 'has-error')
+                }
+                return is_ok
+            },
+            login: function(event) {
+                event.preventDefault()
+                event.stopPropagation()
+                console.log('to Login:', this.user, this.password);
+                let is_ok = this.checkLoginForm()
+                if (is_ok === false) {
+                    return;
+                }
+
+                this.$http.post('http://192.168.1.60:9001/login/',{
+                    user: 'chenjsh',
+                    password: '1234',
+                    verifycode: '2xs2'
+                }).then((response) => {
+                    let json_res = response.json()
+
+                    if (json_res.status !== 200) {
+                        console.log('error', json_res)
+                        return;
+                    }
+                    console.log('success', json_res)
+                }, (response) => {
+                    let json_res = response.json()
+                    console.log('error', json_res)
+                })
             }
         }
     }
@@ -49,12 +103,5 @@
             margin: 15px;
         }
     }
-    .ss-fixed-bottombar {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        margin-bottom: 15px;
-        text-align: center;
-    }
+
 </style>

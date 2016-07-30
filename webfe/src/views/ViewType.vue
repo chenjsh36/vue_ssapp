@@ -32,6 +32,7 @@
 
                 if (json_res.status !== 200) {
                     this.articletypes_empty()
+                    return
                 }
                 let article_types = json_res.data.article_types
                 this.articletypes_set(article_types)

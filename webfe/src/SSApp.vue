@@ -1,12 +1,13 @@
 <template lang="jade">
     .ss-app
         //- 顶部栏
-        nav.ss-topbar
+        nav.ss-topbar 
+            .title 首页
 
         //- 路由渲染
         .ss-body.ss-float-container
             .col-xs-12
-                router-view
+                router-view(:auth="share_data.auth")
         //- 底部栏
         nav.ss-bottombar.navbar.navbar-default.navbar-fixed-bottom.navbar-inverse
             .container
@@ -18,21 +19,29 @@
 </template>
     
 <script>
+    window.auth = {
+        is_login: false,
+        user: 'chenjsh36',
+
+    }
     // import CompSidebar from './components/CompSidebar.vue'
-    import CompArticleList from './components/CompArticleList.vue'
+    // import CompArticleList from './components/CompArticleList.vue'
     export default {
         data () {
             return {
                 msg: 'chenjsh',
                 user: {
                     name: 'chenjsh36'
+                },
+                share_data: {
+                    auth: window.auth   
                 }
             }
         },
         // replace: false,
         components: {
             // CompSidebar,
-            CompArticleList
+            // CompArticleList
         }
     }
 
@@ -45,6 +54,14 @@
     @topbarHeight: 40px;
     
     @topbarZIndex: 1030;
+
+    .transition-func {
+        -webkit-transition: .2s all;
+        -moz-transition: .2s all;
+        -ms-transition: .2s all;
+        transition: .2s all;
+    }
+
     body {
         background-color: @bodyColor;
     }
@@ -87,30 +104,72 @@
             .ss-topbar {
                 position: relative;
                 width: 100%;
-                height: 32px;
-                line-height: 32px;
-                background-color: #00ff00;
+                height: @topbarHeight;
+                line-height: @topbarHeight;
+                background-color: @colorBlack;
                 text-align: center;
+                color: #fff;
                 .back-item {
                     position: absolute;
-                    left: 0;
-                    top: 1px;
-                    height: 30px;
-                    width: 30px;
-                    border: 1px solid white;
+                    left: 5px;
+                    top: (@topbarHeight - 30px) / 2;
+                    // height: 30px;
+                    // width: 30px;
+                    // border: 1px solid white;
+                    // border-radius: 50%;
+                    font-size: 30px;
+                    .transition-func();
+                    &:hover {
+                        color: rgba(255, 255, 255, .8);
+                    }
                 }
-                .title {
+                // .title {
 
-                }
+                // }
             }
-
+            .ss-fixed-bottombar {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                text-align: center;
+            }
         }  
+        .ss-absolute-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: @topbarZIndex + 1;
+        }
         .ss-topbar {
             position: fixed;
             width: 100%;
             height: @topbarHeight;
+            line-height: @topbarHeight;
             background-color: @colorBlack;
             z-index: @topbarZIndex;
+            text-align: center;
+            .title {
+                color: #fff;
+                font-size: 16px;
+            }
+        }
+        // 组件过渡动画
+        /* 必需 */
+        .ss-transition {
+            transition: all .2s ease;
+            transform: translate(0,0);
+        }
+
+        /* .ss-enter 定义进入的开始状态 */
+        /* .ss-leave 定义离开的结束状态 */
+        .ss-enter, .ss-leave {
+            transform: translate(100%, 0);
+            opacity: 0;
+        }
+        .ss-fixed-right {
+            transform: translate(100%,0);
         }
     }
 
