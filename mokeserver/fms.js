@@ -112,6 +112,34 @@ var moke_articles = [
             evaluate: 90,
             publish_time: '2016-7-30',
             relative_img: ['http://i0.hdslb.com/bfs/archive/c1a3366a52995125fc4102e2e950a44b52494779.jpg', 'http://i0.hdslb.com/bfs/archive/c1a3366a52995125fc4102e2e950a44b52494779.jpg', 'http://i0.hdslb.com/bfs/archive/c1a3366a52995125fc4102e2e950a44b52494779.jpg', 'http://i0.hdslb.com/bfs/archive/c1a3366a52995125fc4102e2e950a44b52494779.jpg']
+        },
+        {
+            id: 9,
+            title: '今年期待的动漫',
+            name: '半田君的日常生活',
+            img: 'http://rs.bukade.com/upfiles/2016/06/081648339.jpg',
+            content: '主人公有毒',
+            type: ['热血', '校园', '脑残'],
+            actors: ['半田君'],
+            director: '王金',
+            company: '斐波那契',
+            evaluate: 90,
+            publish_time: '2016-7-30',
+            relative_img: ['http://i0.hdslb.com/bfs/archive/c1a3366a52995125fc4102e2e950a44b52494779.jpg', 'http://i0.hdslb.com/bfs/archive/c1a3366a52995125fc4102e2e950a44b52494779.jpg', 'http://i0.hdslb.com/bfs/archive/c1a3366a52995125fc4102e2e950a44b52494779.jpg', 'http://i0.hdslb.com/bfs/archive/c1a3366a52995125fc4102e2e950a44b52494779.jpg']
+        },
+        {
+            id: 10,
+            title: '今年期待的动漫',
+            name: '半田君的日常生活',
+            img: 'http://rs.bukade.com/upfiles/2016/06/081648339.jpg',
+            content: '主人公有毒',
+            type: ['热血', '校园', '脑残'],
+            actors: ['半田君'],
+            director: '王金',
+            company: '斐波那契',
+            evaluate: 90,
+            publish_time: '2016-7-30',
+            relative_img: ['http://i0.hdslb.com/bfs/archive/c1a3366a52995125fc4102e2e950a44b52494779.jpg', 'http://i0.hdslb.com/bfs/archive/c1a3366a52995125fc4102e2e950a44b52494779.jpg', 'http://i0.hdslb.com/bfs/archive/c1a3366a52995125fc4102e2e950a44b52494779.jpg', 'http://i0.hdslb.com/bfs/archive/c1a3366a52995125fc4102e2e950a44b52494779.jpg']
         }
     ];
 fms.run({

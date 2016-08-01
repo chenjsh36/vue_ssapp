@@ -4,7 +4,7 @@
             .ss-article-type-item-title
                 span {{key}}
             .ss-article-type-item-sublist
-                span.label.label-default.ss-article-type-item-sublist-title(v-for="obj in val") {{obj.name}}    
+                span.label.label-default.ss-article-type-item-sublist-title(v-for="obj in val" v-on:click="selectType(obj.id)") {{obj.name}}    
 </template>
 
 <script>
@@ -18,6 +18,12 @@
         props: ['articletypes', 'test'],
         ready: function() {
             console.log('articletypes:', this.props, this);
+        },
+        methods: {
+            selectType: function(id) {
+                console.log('select type: ', id);
+                this.$dispatch('child-selecttype', id)
+            }
         }
     }
 </script>
@@ -31,7 +37,8 @@
     .ss-article-types {
 
         .ss-article-type-item {
-            padding-top: 15px;            
+            // padding-top: 15px;
+            padding: 15px 10px;   
         }
         .ss-article-type-item-title {
             border-bottom: 1px solid #463636;

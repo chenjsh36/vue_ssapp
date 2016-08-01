@@ -51,7 +51,6 @@
 
     .ss-user {
         position: relative;
-        margin: 0 -15px;
         // 个人卡片
         .ss-user-card {
             position: relative;

@@ -1,9 +1,6 @@
 <template lang="jade">
     .ss-fixed-container(v-show="show" transition="ss")
-        .ss-topbar
-            .back-item.glyphicon.glyphicon-circle-arrow-left(v-on:click="goBack")
-            .title 登录
-
+        comp-topbar(:title="title" back="true")
         .ss-login-container
             form.ss-login-form
                 .form-group
@@ -21,18 +18,23 @@
 
 <script>
     import SS from '.././common/ssquery.js'
+    import CompTopbar from './../components/CompTopbar.vue'
     export default {
         data() {
             return {
                 msg: 'I am view user login',
                 name: 'ViewUserLogin',
                 show: true,
+                title: '登录',
                 user: '',
                 password: ''
             }
         },
         ready: function() {
             console.log('ViewUserLogin ready!')
+        },
+        components: {
+            CompTopbar
         },
         methods: {
             // 返回上一级历史

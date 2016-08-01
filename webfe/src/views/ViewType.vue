@@ -1,8 +1,15 @@
 <template lang="jade">
-    comp-article-types(:test="msg", :articletypes="share_data.articletypes")
+    .ss-viewtype-container
+        comp-topbar(:title="title")
+        comp-article-types(:test="msg", :articletypes="share_data.articletypes" v-on:child-selecttype="showArticleOfType")
+        comp-bottombar
+
+
 </template>
 
 <script>
+    import CompTopbar from './../components/CompTopbar.vue'
+    import CompBottombar from './../components/CompBottombar.vue'
     import CompArticleTypes from './../components/CompArticleTypes.vue'
 
     export default {
@@ -10,20 +17,22 @@
             return {
                 msg: 'I am view type',
                 name: 'ViewType',
+                title: '分类',
                 share_data: {
                     articletypes: {}
                 }
             }
         },
         components: {
-            CompArticleTypes
+            CompTopbar,
+            CompBottombar,
+            CompArticleTypes,
+
         },
         // 生命周期函数
         created: function() {
-            console.log('Created: name is ', this.name);
         },        
         compiled: function() {
-            console.log('Compiled: name is ', this.name);
         },
         ready: function() {
             this.$http.get('http://192.168.1.60:9001/articles/articletypes/').then((response) => {
@@ -31,21 +40,20 @@
                 let json_res = response.json()
 
                 if (json_res.status !== 200) {
-                    this.articletypes_empty()
+                    this.articletypesEmpty()
                     return
                 }
                 let article_types = json_res.data.article_types
-                this.articletypes_set(article_types)
+                this.articletypesSet(article_types)
             }, () => {
                 // error callback
-                this.articletypes_empty()
+                this.articletypesEmpty()
             });
         },
         destroyed: function() {
-            console.log('Destroyed: name is ', this.name);
         },
         methods: {
-            articletypes_set: function(article_types) {
+            articletypesSet: function(article_types) {
                 let sort_article_types = {}
                 for (let i = 0, len = article_types.length; i < len; i++) {
                     let article_type_tmp = article_types[i],
@@ -68,9 +76,17 @@
                 }
                 this.share_data.articletypes = sort_article_types
             },
-            articletypes_empty: function() {
+            articletypesEmpty: function() {
                 this.share_data.article_types = {}
+            },
+            showArticleOfType: function(id) {
+                console.log('to show article of type: ', id);
+                this.$router.go('/articlesoftype/' + id);
             }
         }
     }
 </script>
+
+<style lang="less">
+    
+</style>

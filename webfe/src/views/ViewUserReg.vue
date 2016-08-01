@@ -1,8 +1,9 @@
 <template lang="jade">
     .ss-fixed-container(v-show="show" transition="ss")
-        .ss-topbar
-            .back-item.glyphicon.glyphicon-circle-arrow-left(v-on:click="goBack")
-            .title(v-on:click="focus") 注册
+        comp-topbar(:title="title" back="true")
+        //- .ss-topbar
+        //-     .back-item.glyphicon.glyphicon-circle-arrow-left(v-on:click="goBack")
+        //-     .title(v-on:click="focus") 注册
 
         .ss-login-container
             form.ss-login-form
@@ -17,16 +18,21 @@
 </template>
 
 <script>
+    import CompTopbar from './../components/CompTopbar.vue'
     export default {
         data() {
             return {
                 msg: 'I am view user login',
                 name: 'ViewUserLogin',
-                show: true
+                show: true,
+                title: '注册'
             }
         },
         ready: function() {
             console.log('ViewUserLogin ready!')
+        },
+        components: {
+            CompTopbar
         },
         methods: {
             // 返回上一级历史
