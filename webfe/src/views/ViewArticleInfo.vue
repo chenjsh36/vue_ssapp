@@ -1,9 +1,14 @@
 <template lang="jade">
-    comp-article-view(:selected_article="share_data.selected_article")
+    .ss-articleinfo-container
+        comp-article-view(:selected_article="share_data.selected_article" v-on:child-gocollect="tocollect")
+        comp-alert(:show.sync="share_data.show_alert")
+            h3(slot="header") {{share_data.header_alert}}
+            p(slot="body") {{share_data.body_alert}} 
 
 </template>
 <script>
     import CompArticleView from '../components/CompArticleView.vue'
+    import CompAlert from '../components/CompAlert.vue'
 
     export default {
         data () {
@@ -24,12 +29,28 @@
                             evaluate: 100,
                             publish_time: 'YYYY-MM-DD',
                             relative_img: ['http://i0.hdslb.com/bfs/archive/c1a3366a52995125fc4102e2e950a44b52494779.jpg', 'http://i0.hdslb.com/bfs/archive/c1a3366a52995125fc4102e2e950a44b52494779.jpg', 'http://i0.hdslb.com/bfs/archive/c1a3366a52995125fc4102e2e950a44b52494779.jpg', 'http://i0.hdslb.com/bfs/archive/c1a3366a52995125fc4102e2e950a44b52494779.jpg']
-                    }
+                    },
+                    show_alert: false,
+                    body_alert: '默认',
+                    header_alert: '提示'
                 }
             }
         },
         components: {
-            CompArticleView
+            CompArticleView,
+            CompAlert
+        },
+        methods: {
+            tocollect: function(id) {
+                console.log('to collect: ', id, this.share_data.show_alert);
+                this.share_data.header_alert = '提示';
+                this.share_data.body_alert = '您还没有登录，请登录后收藏！';
+                this.share_data.show_alert = true;
+
+            }
+        },
+        events: {
+
         },
         ready: function() {
             setTimeout((function(){

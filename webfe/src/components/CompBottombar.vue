@@ -1,7 +1,7 @@
 <template lang="jade">
         //- 底部栏
         .ss-bottombar-zanwei
-        nav.ss-bottombar.navbar.navbar-default.navbar-fixed-bottom.navbar-inverse
+        nav.navbar.navbar-default.navbar-fixed-bottom.navbar-inverse.ss-bottombar
             .container
                 ul.nav.navbar-nav
                     li.col-xs-3: a(v-link="{ path: '/home' }") 首页
@@ -25,7 +25,7 @@
     @bottomBackColor: #000;
     .ss-bottombar {
         height: @bottombarHeight;
-        a {
+        li > a {
             padding-right: 0;
             padding-left: 0;
             fons-size: 12px;

@@ -15,7 +15,7 @@
                         span {{type}}
 
         .ss-bottombar
-            .col-xs-6.ss-user-collect 收藏
+            .col-xs-6.ss-user-collect(v-on:click="gocollect") 收藏
             .col-xs-6.ss-user-getss 资源
                 
 </template>
@@ -40,6 +40,9 @@
         methods: {
             goBack: function() {
                 window.history.back()
+            },
+            gocollect: function() {
+                this.$dispatch('child-gocollect', this.selected_article.id)
             }
         },
         events: {
